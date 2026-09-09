@@ -15,8 +15,11 @@ public class Formulario {
                 System.out.println(linha);
             }
 
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        } catch (FileNotFoundException e){
+            System.out.println("Error: Arquivo não encontrado");
+
+        }catch (IOException e) {
+            System.out.println("Erro genérico de Leitura/Escrita");
         }
     }
 }
