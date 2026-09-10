@@ -1,5 +1,7 @@
 package system.cli;
 
+import system.service.Formulario;
+
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
@@ -22,9 +24,9 @@ public class Menu {
             System.out.println("==================================");
 
             System.out.print("Escolha uma opção: ");
-
+            int opcao = 0;
             try {
-                int opcao = Integer.parseInt(sc.nextLine());
+                opcao = Integer.parseInt(sc.nextLine());
 
                 if (opcao <= 0 || opcao > 6) {
                     System.out.println("Opção inválida, escolha novamente.");
@@ -35,10 +37,27 @@ public class Menu {
             }
 
             try {
-                TimeUnit.SECONDS.sleep(1);
+                TimeUnit.MILLISECONDS.sleep(500);
             } catch (InterruptedException e) {
                 System.out.println("A espera foi interrompida");
             }
+
+            switch (opcao){
+                case 1:
+                    Formulario.exibirFormulario();
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    break;
+                case 6:
+                    break;
+            }
+
         }
 
 
