@@ -4,7 +4,8 @@ import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 public class Menu {
-    public static void main(String[] args) {
+
+    public static void iniciarMenu(){
         Scanner sc = new Scanner(System.in);
         boolean loop = true;
 
@@ -39,5 +40,7 @@ public class Menu {
                 System.out.println("A espera foi interrompida");
             }
         }
+
+
     }
 }
