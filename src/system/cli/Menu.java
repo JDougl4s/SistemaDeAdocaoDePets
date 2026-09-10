@@ -1,6 +1,5 @@
 package system.cli;
 
-import java.io.Reader;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
@@ -9,7 +8,7 @@ public class Menu {
         Scanner sc = new Scanner(System.in);
         boolean loop = true;
 
-        while (loop){
+        while (loop) {
             System.out.println("==================================");
             System.out.println("            ADOPT-PETs            ");
             System.out.println("==================================");
@@ -21,20 +20,23 @@ public class Menu {
             System.out.println("6 - Sair");
             System.out.println("==================================");
 
-            if (!sc.hasNextInt()) {
-                System.out.println("Só aceitamos digitos, escolha novamente");
-            }else{
-                int opcao = sc.nextInt();
-                sc.nextLine();
+            System.out.print("Escolha uma opção: ");
 
-                if (opcao <= 0 || opcao > 6 ){
+            try {
+                int opcao = Integer.parseInt(sc.nextLine());
+
+                if (opcao <= 0 || opcao > 6) {
                     System.out.println("Opção inválida, escolha novamente.");
                 }
-                try {
-                    TimeUnit.SECONDS.sleep(1);
-                } catch (InterruptedException e) {
-                    System.out.println("A espera foi interrompida");
-                }
+
+            } catch (NumberFormatException e) {
+                System.out.println("Só aceitamos digito.");
+            }
+
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch (InterruptedException e) {
+                System.out.println("A espera foi interrompida");
             }
         }
     }
