@@ -2,8 +2,7 @@ package system.domain;
 
 public enum TipoPet {
     CACHORRO("Cachorro"),
-    GATO("Gato"),
-    PASSARO("Passaro");
+    GATO("Gato");
 
     private final String nome;
 
