@@ -49,7 +49,11 @@ public class Menu {
             switch (opcao){
                 case 1:
                     Formulario formulario = new Formulario();
-
+                    String perguntas;
+                    for (int i = 0; i < 2; i++) {
+                        perguntas = formulario.exibirPerguntas();
+                        System.out.println(perguntas);
+                    }
                     break;
                 case 2:
                     break;
