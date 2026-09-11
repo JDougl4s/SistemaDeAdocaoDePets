@@ -2,6 +2,10 @@ package system.cli;
 
 import system.service.Formulario;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.text.Normalizer;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
@@ -44,7 +48,8 @@ public class Menu {
 
             switch (opcao){
                 case 1:
-                    Formulario.exibirFormulario();
+                    Formulario formulario = new Formulario();
+
                     break;
                 case 2:
                     break;
