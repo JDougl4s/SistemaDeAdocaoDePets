@@ -2,11 +2,6 @@ package system.cli;
 
 import system.service.Formulario;
 import system.service.PetService;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.text.Normalizer;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
