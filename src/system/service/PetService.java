@@ -1,12 +1,22 @@
 package system.service;
 
 import system.domain.Pet;
-
-import java.util.List;
+import system.exceptions.NomeSobrenomeInvalidoException;
 
 public class PetService {
 
-    public void cadastrarPet(List<Pet> pets){
+    private Pet pet;
+
+    public PetService() {
+        this.pet = new Pet();
+    }
+
+    public void receberDadosPet(String[] dados) {
+
+    }
+
+    public void validarNomeSobrenome(String nomeSobrenome) {
+
 
     }
 }

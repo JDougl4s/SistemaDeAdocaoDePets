@@ -1,6 +1,7 @@
 package system.cli;
 
 import system.service.Formulario;
+import system.service.PetService;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -49,11 +50,14 @@ public class Menu {
             switch (opcao){
                 case 1:
                     Formulario formulario = new Formulario();
-                    String perguntas;
-                    for (int i = 0; i < 2; i++) {
-                        perguntas = formulario.exibirPerguntas();
-                        System.out.println(perguntas);
+                    String[] respostas = new String[8];
+
+                    for (int i = 0; i < 8; i++) {
+                        System.out.println(formulario.exibirPerguntas());
+                        respostas[i] = sc.nextLine();
                     }
+                    PetService petService = new PetService();
+                    petService.receberDadosPet(respostas);
                     break;
                 case 2:
                     break;
