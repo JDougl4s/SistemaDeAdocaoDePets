@@ -2,7 +2,7 @@ package system.domain;
 
 public class Pet {
     private String nome;
-    private String sobreNome;
+    private String sobrenome;
     private TipoPet tipoPet;
     private Sexo sexo;
     private Endereco endereco;
@@ -20,11 +20,11 @@ public class Pet {
     }
 
     public String getSobreNome() {
-        return sobreNome;
+        return sobrenome;
     }
 
     public void setSobreNome(String sobreNome) {
-        this.sobreNome = sobreNome;
+        this.sobrenome = sobreNome;
     }
 
     public TipoPet getTipoPet() {

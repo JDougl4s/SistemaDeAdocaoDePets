@@ -1,13 +1,17 @@
 package system.cli;
 
+import system.exceptions.NomeInvalidoException;
+import system.exceptions.NomeSobrenomeInvalidoException;
+import system.exceptions.SobrenomeInvalidoException;
 import system.service.Formulario;
 import system.service.PetService;
+
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 public class Menu {
 
-    public static void iniciarMenu(){
+    public static void iniciarMenu() {
         Scanner sc = new Scanner(System.in);
         boolean loop = true;
 
@@ -26,7 +30,7 @@ public class Menu {
             System.out.print("Escolha uma opção: ");
             int opcao = 0;
             try {
-                opcao = Integer.parseInt(sc.nextLine());
+                opcao = Integer.parseInt(sc.nextLine().trim());
 
                 if (opcao <= 0 || opcao > 6) {
                     System.out.println("Opção inválida, escolha novamente.");
@@ -42,17 +46,23 @@ public class Menu {
                 System.out.println("A espera foi interrompida");
             }
 
-            switch (opcao){
+            switch (opcao) {
                 case 1:
                     Formulario formulario = new Formulario();
                     String[] respostas = new String[8];
 
                     for (int i = 0; i < 8; i++) {
                         System.out.println(formulario.exibirPerguntas());
-                        respostas[i] = sc.nextLine();
+                        respostas[i] = sc.nextLine().trim().replaceAll("\\s+", " ");
                     }
                     PetService petService = new PetService();
-                    petService.receberDadosPet(respostas);
+
+                    try {
+                        petService.processarDadosPet(respostas);
+                    } catch (NomeSobrenomeInvalidoException e){
+                        System.out.println(e.getMessage());
+                    }
+
                     break;
                 case 2:
                     break;
