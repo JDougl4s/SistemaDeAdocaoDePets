@@ -43,11 +43,9 @@ public class PetService {
                     throw new SobrenomeInvalidoException("Sobrenome contém caracteres especiais");
                 }
             }
-
+            //Se tudo for validado são atribuidos os valores
             this.pet.setNome(nome);
-            System.out.println("TRUE");
             this.pet.setSobreNome(sobrenome);
-            System.out.println("TRUE");
         }else{
             throw new NomeSobrenomeInvalidoException();
         }
