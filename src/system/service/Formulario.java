@@ -11,7 +11,7 @@ public class Formulario {
     public Formulario(){
         try {
             FileReader fl = new FileReader(
-                    "C:\\Users\\newst\\Desktop\\maratona-java-virado-no-jiraya\\SistemasDeCadastros\\src\\system\\formulario.txt"
+                    "C:\\Users\\newst\\Desktop\\maratona-java-virado-no-jiraya\\SistemasDeCadastros\\src\\system\\files\\formulario.txt"
             );
             bufferedReader = new BufferedReader(fl);
 
