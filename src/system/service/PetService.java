@@ -65,6 +65,7 @@ public class PetService {
                 this.pet.setTipoPet(TipoPet.GATO);
             } else {
                 this.pet.setTipoPet(TipoPet.CACHORRO);
+
             }
         }
     }
