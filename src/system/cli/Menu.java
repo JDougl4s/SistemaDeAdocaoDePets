@@ -1,8 +1,6 @@
 package system.cli;
 
-import system.exceptions.NomeInvalidoException;
-import system.exceptions.NomeSobrenomeInvalidoException;
-import system.exceptions.SobrenomeInvalidoException;
+import system.exceptions.*;
 import system.service.Formulario;
 import system.service.PetService;
 
@@ -30,6 +28,7 @@ public class Menu {
             System.out.print("Escolha uma opção: ");
             int opcao = 0;
             try {
+                //Limpa " " no começo e fim de String e transforma String em Integer
                 opcao = Integer.parseInt(sc.nextLine().trim());
 
                 if (opcao <= 0 || opcao > 6) {
@@ -53,16 +52,16 @@ public class Menu {
 
                     for (int i = 0; i < 8; i++) {
                         System.out.println(formulario.exibirPerguntas());
+                        //Limpa " " no começo e fim de String e troca espaços duplicados por " "
                         respostas[i] = sc.nextLine().trim().replaceAll("\\s+", " ");
                     }
                     PetService petService = new PetService();
 
                     try {
                         petService.processarDadosPet(respostas);
-                    } catch (NomeSobrenomeInvalidoException e){
+                    } catch (DadoInvalidoException | EntradaVaziaException e){
                         System.out.println(e.getMessage());
                     }
-
                     break;
                 case 2:
                     break;
