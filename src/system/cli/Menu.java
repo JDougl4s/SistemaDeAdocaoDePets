@@ -1,5 +1,6 @@
 package system.cli;
 
+import system.domain.Pet;
 import system.exceptions.*;
 import system.service.Formulario;
 import system.service.PetService;
