@@ -1,10 +1,11 @@
 package system.cli;
 
-import system.domain.Pet;
 import system.exceptions.*;
-import system.service.Formulario;
+import system.service.FileManager;
 import system.service.PetService;
 
+import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
@@ -48,13 +49,24 @@ public class Menu {
 
             switch (opcao) {
                 case 1:
-                    Formulario formulario = new Formulario();
-                    String[] respostas = new String[8];
+                    FileManager formularioPerguntas = new FileManager();
+                    ArrayList<Object> respostas = new ArrayList<>();
 
                     for (int i = 0; i < 8; i++) {
-                        System.out.println(formulario.exibirPerguntas());
+                        System.out.println(i+1+"- "+formularioPerguntas.exibirPerguntas());
+
+                        if (i == 4){
+                            FileManager enderecoPerguntas = new FileManager(i);
+                            ArrayList<String> enderecos = new ArrayList<>();
+                            for (int j = 0; j < 4; j++) {
+                                System.out.println(enderecoPerguntas.exibirPerguntas());
+                                enderecos.add(j, sc.nextLine().trim().replaceAll("\\s+", " "));
+                            }
+                            respostas.add(i,enderecos);
+                            continue;
+                        }
                         //Limpa " " no começo e fim de String e troca espaços duplicados por " "
-                        respostas[i] = sc.nextLine().trim().replaceAll("\\s+", " ");
+                        respostas.add(i, sc.nextLine().trim().replaceAll("\\s+", " "));
                     }
                     PetService petService = new PetService();
 

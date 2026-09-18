@@ -1,9 +1,10 @@
 package system.domain;
 
 public class Endereco {
-    private String numeroCasa;
-    private String cidade;
     private String rua;
+    private String numeroCasa;
+    private String bairro;
+    private String cidade;
 
 
     public String getNumeroCasa() {
@@ -28,5 +29,13 @@ public class Endereco {
 
     public void setRua(String rua) {
         this.rua = rua;
+    }
+
+    public String getBairro() {
+        return bairro;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
     }
 }

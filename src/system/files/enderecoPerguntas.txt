@@ -1,0 +1,4 @@
+I. Rua: Indice:0
+II. Número da casa: Indice:1
+III. Bairro: Indice:2
+IV. Cidade: Indice:3

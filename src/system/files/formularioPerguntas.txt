@@ -1,0 +1,8 @@
+Qual o nome do pet? Indice:0
+Qual o sobrenome do pet? Indice:1
+Qual o tipo do pet (Cachorro/Gato)? Indice:2
+Qual o sexo do animal (Macho/Fêmea)? Indice:3
+Qual endereço que ele foi encontrado? Indice:4
+Qual a idade aproximada do pet? Indice:5
+Qual o peso aproximado do pet? Indice:6
+Qual a raça do pet? Indice:7

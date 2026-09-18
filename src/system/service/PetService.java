@@ -5,6 +5,8 @@ import system.domain.Sexo;
 import system.domain.TipoPet;
 import system.exceptions.*;
 
+import java.util.ArrayList;
+
 public class PetService {
 
     private Pet pet;
@@ -13,15 +15,15 @@ public class PetService {
         this.pet = new Pet();
     }
 
-    public void processarDadosPet(String[] dados) throws DadoInvalidoException, EntradaVaziaException{
-        validarNomeSobrenome(dados[0], dados[1]);
-        validarTipoPet(dados[2]);
-        validarSexo(dados[3]);
+    public void processarDadosPet(ArrayList<Object> dados) throws DadoInvalidoException, EntradaVaziaException{
+        //validarNomeSobrenome(dados[0], dados[1]);
+        //validarTipoPet(dados[2]);
+        //validarSexo(dados[3]);
 
-        String endereco = dados[4];
-        String idade = dados[5];
-        String peso = dados[6];
-        String raca = dados[7];
+        //String endereco = dados[4];
+        //String idade = dados[5];
+        //String peso = dados[6];
+        //String raca = dados[7];
     }
 
     public void validarNomeSobrenome(String nomeInput, String sobrenomeInput) {
