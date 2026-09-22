@@ -1,29 +1,28 @@
 package system.service;
 
+import system.domain.Endereco;
 import system.domain.Pet;
 import system.domain.Sexo;
 import system.domain.TipoPet;
 import system.exceptions.*;
-
 import java.util.ArrayList;
 
 public class PetService {
-
+    static final String NAO_INFORMADO = "NÃO INFORMADO";
     private Pet pet;
+
 
     public PetService() {
         this.pet = new Pet();
     }
 
-    public void processarDadosPet(ArrayList<Object> dados) throws DadoInvalidoException, EntradaVaziaException{
-        //validarNomeSobrenome(dados[0], dados[1]);
-        //validarTipoPet(dados[2]);
-        //validarSexo(dados[3]);
+    public void processarDadosPet(ArrayList<Object> dadosInput) throws DadoInvalidoException, EntradaVaziaException {
 
-        //String endereco = dados[4];
-        //String idade = dados[5];
-        //String peso = dados[6];
-        //String raca = dados[7];
+        validarNomeSobrenome((String) dadosInput.get(0), (String) dadosInput.get(1));
+        validarTipoPet((String)dadosInput.get(2));
+        validarSexo((String) dadosInput.get(3));
+        validarEndereco((ArrayList<String>) dadosInput.get(4));
+
     }
 
     public void validarNomeSobrenome(String nomeInput, String sobrenomeInput) {
@@ -73,25 +72,55 @@ public class PetService {
         }
     }
 
-    public void validarSexo(String sexoInput){
+    public void validarSexo(String sexoInput) {
 
         //Verifica se a entrada está vazia, se sim lança exceção
-        if (sexoInput.isBlank()){
+        if (sexoInput.isBlank()) {
             throw new EntradaVaziaException("Sexo do pet não foi fornecido.");
         }
         //Verifica se a entrada NÃO É Femea && Macho, se for true lança exceção
         if (!StringUtils.removeAccents(sexoInput).equalsIgnoreCase(StringUtils.removeAccents(Sexo.FEMININO.getSexo())) &&
-                !StringUtils.removeAccents(sexoInput).equalsIgnoreCase(StringUtils.removeAccents(Sexo.MASCULINO.getSexo()))){
+                !StringUtils.removeAccents(sexoInput).equalsIgnoreCase(StringUtils.removeAccents(Sexo.MASCULINO.getSexo()))) {
             throw new SexoInvalidoException();
-        }else{
+        } else {
             //Verifica se a entrada é igual a Fêmea, se for atribui o valor Fêmea.
-            if (StringUtils.removeAccents(sexoInput).equalsIgnoreCase(StringUtils.removeAccents(Sexo.FEMININO.getSexo()))){
+            if (StringUtils.removeAccents(sexoInput).equalsIgnoreCase(StringUtils.removeAccents(Sexo.FEMININO.getSexo()))) {
                 this.pet.setSexo(Sexo.FEMININO);
-            }else{ //Se não for igual a Fêmea, atribui o valor Macho.
+            } else { //Se não for igual a Fêmea, atribui o valor Macho.
                 this.pet.setSexo(Sexo.MASCULINO);
             }
         }
     }
 
+    public void validarEndereco(ArrayList<String> enderecoInput) {
+        //Tratamento Rua
+        if(enderecoInput.get(0).isBlank()){
+            pet.getEndereco().setRua(NAO_INFORMADO);
+        }else{
+            pet.getEndereco().setRua(enderecoInput.get(0));
+        }
+        //Tratamento Numero da Casa
+        if(enderecoInput.get(1).isBlank()){
+            pet.getEndereco().setNumeroCasa(NAO_INFORMADO);
+        }else{
+            pet.getEndereco().setNumeroCasa(enderecoInput.get(1));
+        }
+        //Tratamento Bairro
+        if(enderecoInput.get(2).isBlank()){
+            pet.getEndereco().setBairro(NAO_INFORMADO);
+        }else{
+            pet.getEndereco().setBairro(enderecoInput.get(2));
+        }
+        //Tratamento Cidade
+        if(enderecoInput.get(3).isBlank()){
+            pet.getEndereco().setCidade(NAO_INFORMADO);
+        }else{
+            pet.getEndereco().setCidade(enderecoInput.get(3));
+        }
+        System.out.println(pet.getEndereco().getRua());
+        System.out.println(pet.getEndereco().getNumeroCasa());
+        System.out.println(pet.getEndereco().getBairro());
+        System.out.println(pet.getEndereco().getCidade());
 
+    }
 }

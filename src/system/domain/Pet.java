@@ -5,11 +5,10 @@ public class Pet {
     private String sobrenome;
     private TipoPet tipoPet;
     private Sexo sexo;
-    private Endereco endereco;
+    private Endereco endereco = new Endereco();
     private double idade;
     private double peso;
     private String raca;
-
 
     public String getNome() {
         return nome;

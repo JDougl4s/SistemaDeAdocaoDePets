@@ -1,5 +1,6 @@
 package system.cli;
 
+import system.domain.TipoFormulario;
 import system.exceptions.*;
 import system.service.FileManager;
 import system.service.PetService;
@@ -49,24 +50,24 @@ public class Menu {
 
             switch (opcao) {
                 case 1:
-                    FileManager formularioPerguntas = new FileManager();
+                    FileManager formularioPerguntas = new FileManager(TipoFormulario.PRINCIPAL);
                     ArrayList<Object> respostas = new ArrayList<>();
 
                     for (int i = 0; i < 8; i++) {
                         System.out.println(i+1+"- "+formularioPerguntas.exibirPerguntas());
 
                         if (i == 4){
-                            FileManager enderecoPerguntas = new FileManager(i);
+                            FileManager enderecoPerguntas = new FileManager(TipoFormulario.ENDERECO);
                             ArrayList<String> enderecos = new ArrayList<>();
                             for (int j = 0; j < 4; j++) {
                                 System.out.println(enderecoPerguntas.exibirPerguntas());
-                                enderecos.add(j, sc.nextLine().trim().replaceAll("\\s+", " "));
+                                enderecos.add(sc.nextLine().trim().replaceAll("\\s+", " "));
                             }
-                            respostas.add(i,enderecos);
+                            respostas.add(enderecos);
                             continue;
                         }
                         //Limpa " " no começo e fim de String e troca espaços duplicados por " "
-                        respostas.add(i, sc.nextLine().trim().replaceAll("\\s+", " "));
+                        respostas.add(sc.nextLine().trim().replaceAll("\\s+", " "));
                     }
                     PetService petService = new PetService();
 
