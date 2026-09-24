@@ -1,10 +1,10 @@
 package system.service;
 
-import system.domain.Endereco;
 import system.domain.Pet;
 import system.domain.Sexo;
 import system.domain.TipoPet;
 import system.exceptions.*;
+
 import java.util.ArrayList;
 
 public class PetService {
@@ -19,9 +19,10 @@ public class PetService {
     public void processarDadosPet(ArrayList<Object> dadosInput) throws DadoInvalidoException, EntradaVaziaException {
 
         validarNomeSobrenome((String) dadosInput.get(0), (String) dadosInput.get(1));
-        validarTipoPet((String)dadosInput.get(2));
+        validarTipoPet((String) dadosInput.get(2));
         validarSexo((String) dadosInput.get(3));
         validarEndereco((ArrayList<String>) dadosInput.get(4));
+        validarIdade((String) dadosInput.get(5));
 
     }
 
@@ -94,27 +95,27 @@ public class PetService {
 
     public void validarEndereco(ArrayList<String> enderecoInput) {
         //Tratamento Rua
-        if(enderecoInput.get(0).isBlank()){
+        if (enderecoInput.get(0).isBlank()) {
             pet.getEndereco().setRua(NAO_INFORMADO);
-        }else{
+        } else {
             pet.getEndereco().setRua(enderecoInput.get(0));
         }
         //Tratamento Numero da Casa
-        if(enderecoInput.get(1).isBlank()){
+        if (enderecoInput.get(1).isBlank()) {
             pet.getEndereco().setNumeroCasa(NAO_INFORMADO);
-        }else{
+        } else {
             pet.getEndereco().setNumeroCasa(enderecoInput.get(1));
         }
         //Tratamento Bairro
-        if(enderecoInput.get(2).isBlank()){
+        if (enderecoInput.get(2).isBlank()) {
             pet.getEndereco().setBairro(NAO_INFORMADO);
-        }else{
+        } else {
             pet.getEndereco().setBairro(enderecoInput.get(2));
         }
         //Tratamento Cidade
-        if(enderecoInput.get(3).isBlank()){
+        if (enderecoInput.get(3).isBlank()) {
             pet.getEndereco().setCidade(NAO_INFORMADO);
-        }else{
+        } else {
             pet.getEndereco().setCidade(enderecoInput.get(3));
         }
         System.out.println(pet.getEndereco().getRua());
@@ -122,5 +123,31 @@ public class PetService {
         System.out.println(pet.getEndereco().getBairro());
         System.out.println(pet.getEndereco().getCidade());
 
+    }
+
+    public void validarIdade(String idadeInput) {
+        //Verifica se entrada está vazia
+        if (idadeInput.isBlank()) {
+            pet.setIdade(null);
+            return;
+        }
+
+        if (!idadeInput.matches("^\\d+([.,]\\d+)?$")) {
+            throw new IdadeInvalidaException("Idade do pet deve conter apenas números.");
+        }else{
+            Double idadeConvertida;
+            if (idadeInput.contains(",")){
+                idadeInput = idadeInput.replace(",",".");
+                idadeConvertida = Double.parseDouble(idadeInput);
+            }else{
+                idadeConvertida = Double.parseDouble(idadeInput);
+            }
+
+            if (idadeConvertida > 20){
+                throw new IdadeInvalidaException("Não aceitamos pet com mais de 20 anos.");
+            }
+
+
+        }
     }
 }

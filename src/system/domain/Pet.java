@@ -6,7 +6,7 @@ public class Pet {
     private TipoPet tipoPet;
     private Sexo sexo;
     private Endereco endereco = new Endereco();
-    private double idade;
+    private Double idade; // tipo Double para o atributo conseguir receber null
     private double peso;
     private String raca;
 
@@ -50,11 +50,11 @@ public class Pet {
         this.endereco = endereco;
     }
 
-    public double getIdade() {
+    public Double getIdade() {
         return idade;
     }
 
-    public void setIdade(double idade) {
+    public void setIdade(Double idade) {
         this.idade = idade;
     }
 

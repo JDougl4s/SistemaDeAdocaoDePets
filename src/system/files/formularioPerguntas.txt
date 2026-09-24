@@ -3,6 +3,6 @@ Qual o sobrenome do pet?
 Qual o tipo do pet (Cachorro/Gato)?
 Qual o sexo do animal (Macho/Fêmea)?
 Qual endereço que ele foi encontrado?
-Qual a idade aproximada do pet?
+Qual a idade aproximada do pet? Informe em anos ou, se tiver menos de 1 ano, use valores de 3 em 3 meses (0,25 = 3 meses, 0,5 = 6 meses , 0,75 = 9 meses).
 Qual o peso aproximado do pet?
 Qual a raça do pet?
