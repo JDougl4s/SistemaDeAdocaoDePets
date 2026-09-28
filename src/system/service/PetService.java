@@ -24,6 +24,7 @@ public class PetService {
         validarEndereco((ArrayList<String>) dadosInput.get(4));
         validarIdade((String) dadosInput.get(5));
         validarPeso((String) dadosInput.get(6));
+        validarRaca((String) dadosInput.get(7));
 
     }
 
@@ -184,5 +185,9 @@ public class PetService {
             pet.setPeso(pesoConvertido);
             System.out.println("ok baby");
         }
+    }
+
+    public void validarRaca(String racaInput){
+
     }
 }
