@@ -23,6 +23,7 @@ public class PetService {
         validarSexo((String) dadosInput.get(3));
         validarEndereco((ArrayList<String>) dadosInput.get(4));
         validarIdade((String) dadosInput.get(5));
+        validarPeso((String) dadosInput.get(6));
 
     }
 
@@ -143,15 +144,45 @@ public class PetService {
                 throw new IdadeInvalidaException("Não aceitamos pet com mais de 20 anos.");
             }
             //Verifica se o usuario digitou de 3 em 3 meses como foi informado
-            if (idadeConvertida < 1){
-                if (idadeConvertida == 0.25 || idadeConvertida == 0.5 || idadeConvertida == 0.75){
-                   pet.setIdade(idadeConvertida);
-                   return;
-                }else {
+            if (idadeConvertida < 1) {
+                if (idadeConvertida == 0.25 || idadeConvertida == 0.5 || idadeConvertida == 0.75) {
+                    pet.setIdade(idadeConvertida);
+                    return;
+                } else {
                     throw new IdadeInvalidaException("Para pets com menos de 1 ano, informe 0,25 (3 meses), 0,5 (6 meses) ou 0,75 (9 meses).");
                 }
             }
             pet.setIdade(idadeConvertida);
+        }
+    }
+
+    public void validarPeso(String pesoInput) {
+        //Verifica se entrada está vazia
+        if (pesoInput.isBlank()) {
+            pet.setPeso(null);
+            System.out.println("ok");
+            return;
+        }
+        //Verifica se só contem numero
+        if (!pesoInput.matches("^\\d+([.,]\\d+)?$")) {
+            throw new PesoInvalidoException("Peso do pet deve conter apenas números.");
+        } else {
+            Double pesoConvertido;
+            //Verifica se tem "," se sim trocar por "." e converte para Double
+            if (pesoInput.contains(",")) {
+                pesoInput = pesoInput.replace(",", ".");
+                pesoConvertido = Double.parseDouble(pesoInput);
+                System.out.println(pesoConvertido);
+            } else {
+                pesoConvertido = Double.parseDouble(pesoInput);
+                System.out.println(pesoConvertido);
+
+            }
+            if (pesoConvertido > 60.0 || pesoConvertido < 0.5){
+                throw new PesoInvalidoException("O peso do pet deve estar entre 0,5 kg e 60 kg.");
+            }
+            pet.setPeso(pesoConvertido);
+            System.out.println("ok baby");
         }
     }
 }
