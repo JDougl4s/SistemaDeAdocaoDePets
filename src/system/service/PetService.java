@@ -118,11 +118,6 @@ public class PetService {
         } else {
             pet.getEndereco().setCidade(enderecoInput.get(3));
         }
-        System.out.println(pet.getEndereco().getRua());
-        System.out.println(pet.getEndereco().getNumeroCasa());
-        System.out.println(pet.getEndereco().getBairro());
-        System.out.println(pet.getEndereco().getCidade());
-
     }
 
     public void validarIdade(String idadeInput) {
@@ -131,23 +126,32 @@ public class PetService {
             pet.setIdade(null);
             return;
         }
-
+        //Verifica se só contem numero
         if (!idadeInput.matches("^\\d+([.,]\\d+)?$")) {
             throw new IdadeInvalidaException("Idade do pet deve conter apenas números.");
-        }else{
+        } else {
             Double idadeConvertida;
-            if (idadeInput.contains(",")){
-                idadeInput = idadeInput.replace(",",".");
+            //Verifica se tem "," se sim trocar por "." e converte para Double
+            if (idadeInput.contains(",")) {
+                idadeInput = idadeInput.replace(",", ".");
                 idadeConvertida = Double.parseDouble(idadeInput);
-            }else{
+            } else {
                 idadeConvertida = Double.parseDouble(idadeInput);
             }
-
-            if (idadeConvertida > 20){
+            //Verifica se é maior que 20, se sim lança exceção
+            if (idadeConvertida > 20) {
                 throw new IdadeInvalidaException("Não aceitamos pet com mais de 20 anos.");
             }
-
-
+            //Verifica se o usuario digitou de 3 em 3 meses como foi informado
+            if (idadeConvertida < 1){
+                if (idadeConvertida == 0.25 || idadeConvertida == 0.5 || idadeConvertida == 0.75){
+                   pet.setIdade(idadeConvertida);
+                   return;
+                }else {
+                    throw new IdadeInvalidaException("Para pets com menos de 1 ano, informe 0,25 (3 meses), 0,5 (6 meses) ou 0,75 (9 meses).");
+                }
+            }
+            pet.setIdade(idadeConvertida);
         }
     }
 }
