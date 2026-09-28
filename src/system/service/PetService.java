@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class PetService {
     static final String NAO_INFORMADO = "NÃO INFORMADO";
-    private Pet pet;
+    private final Pet pet;
 
 
     public PetService() {
@@ -35,8 +35,9 @@ public class PetService {
             if (nomeInput.isBlank()) {
                 throw new NomeInvalidoException();
             } else {
+                //verifica se contem apenas letras e espacos, nao lanca exceção
                 if (!nomeInput.matches("^[\\p{L} ]+$")) {
-                    throw new NomeInvalidoException("Nome contém caracteres especiais.");
+                    throw new NomeInvalidoException("Nome não pode ter caracteres especiais.");
                 }
             }
             //Validando sobrenome e lança exceção especifica
@@ -44,7 +45,7 @@ public class PetService {
                 throw new SobrenomeInvalidoException();
             } else {
                 if (!sobrenomeInput.matches("^[\\p{L} ]+$")) {
-                    throw new SobrenomeInvalidoException("Sobrenome contém caracteres especiais.");
+                    throw new SobrenomeInvalidoException("Sobrenome não pode ter caracteres especiais.");
                 }
             }
             //Se tudo for validado são atribuidos os valores
@@ -161,7 +162,6 @@ public class PetService {
         //Verifica se entrada está vazia
         if (pesoInput.isBlank()) {
             pet.setPeso(null);
-            System.out.println("ok");
             return;
         }
         //Verifica se só contem numero
@@ -173,21 +173,26 @@ public class PetService {
             if (pesoInput.contains(",")) {
                 pesoInput = pesoInput.replace(",", ".");
                 pesoConvertido = Double.parseDouble(pesoInput);
-                System.out.println(pesoConvertido);
             } else {
                 pesoConvertido = Double.parseDouble(pesoInput);
-                System.out.println(pesoConvertido);
-
             }
             if (pesoConvertido > 60.0 || pesoConvertido < 0.5){
                 throw new PesoInvalidoException("O peso do pet deve estar entre 0,5 kg e 60 kg.");
             }
             pet.setPeso(pesoConvertido);
-            System.out.println("ok baby");
         }
     }
 
     public void validarRaca(String racaInput){
-
+        if (racaInput.isBlank()){
+            pet.setRaca(NAO_INFORMADO);
+            System.out.println("Ok");
+            return;
+        }
+        if (!racaInput.matches("^[\\p{L} ]+$")){
+            throw new RacaInvalidaException("Raça não pode ter caracteres especiais.");
+        }
+        pet.setRaca(racaInput);
+        System.out.println(racaInput);
     }
 }
