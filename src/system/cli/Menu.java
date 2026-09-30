@@ -1,5 +1,6 @@
 package system.cli;
 
+import system.domain.Pet;
 import system.domain.TipoFormulario;
 import system.exceptions.*;
 import system.service.FileManager;
@@ -15,6 +16,7 @@ public class Menu {
     public static void iniciarMenu() {
         Scanner sc = new Scanner(System.in);
         boolean loop = true;
+        ArrayList<Pet> pets = new ArrayList<>();
 
         while (loop) {
             System.out.println("==================================");
@@ -71,12 +73,36 @@ public class Menu {
                     }
                     PetService petService = new PetService();
 
-                    try {
-                        petService.processarDadosPet(respostas);
-                    } catch (DadoInvalidoException | EntradaVaziaException e){
-                        System.out.println(e.getMessage());
-                    }
-                    break;
+                    switch (opcao) {
+                        case 1:
+                            FileManager formularioPerguntas = new FileManager(TipoFormulario.PRINCIPAL);
+                            ArrayList<Object> respostas = new ArrayList<>();
+
+                            for (int i = 0; i < 8; i++) {
+                                System.out.println(i+1+"- "+formularioPerguntas.exibirPerguntas());
+
+                                if (i == 4){
+                                    FileManager enderecoPerguntas = new FileManager(TipoFormulario.ENDERECO);
+                                    ArrayList<String> enderecos = new ArrayList<>();
+                                    for (int j = 0; j < 4; j++) {
+                                        System.out.println(enderecoPerguntas.exibirPerguntas());
+                                        enderecos.add(sc.nextLine().trim().replaceAll("\\s+", " "));
+                                    }
+                                    respostas.add(enderecos);
+                                    continue;
+                                }
+                                //Limpa " " no começo e fim de String e troca espaços duplicados por " "
+                                respostas.add(sc.nextLine().trim().replaceAll("\\s+", " "));
+                            }
+                            PetService petService = new PetService();
+
+                            try {
+                                petService.processarDadosPet(respostas);
+                                pets.add(petService.getPet());
+                            } catch (DadoInvalidoException | EntradaVaziaException e){
+                                System.out.println(e.getMessage());
+                            }
+                            break;
                 case 2:
                     break;
                 case 3:

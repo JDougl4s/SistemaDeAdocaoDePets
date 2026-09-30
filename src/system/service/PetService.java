@@ -176,23 +176,25 @@ public class PetService {
             } else {
                 pesoConvertido = Double.parseDouble(pesoInput);
             }
-            if (pesoConvertido > 60.0 || pesoConvertido < 0.5){
+            if (pesoConvertido > 60.0 || pesoConvertido < 0.5) {
                 throw new PesoInvalidoException("O peso do pet deve estar entre 0,5 kg e 60 kg.");
             }
             pet.setPeso(pesoConvertido);
         }
     }
 
-    public void validarRaca(String racaInput){
-        if (racaInput.isBlank()){
+    public void validarRaca(String racaInput) {
+        if (racaInput.isBlank()) {
             pet.setRaca(NAO_INFORMADO);
-            System.out.println("Ok");
             return;
         }
-        if (!racaInput.matches("^[\\p{L} ]+$")){
+        if (!racaInput.matches("^[\\p{L} ]+$")) {
             throw new RacaInvalidaException("Raça não pode ter caracteres especiais.");
         }
         pet.setRaca(racaInput);
-        System.out.println(racaInput);
+    }
+
+    public Pet getPet() {
+        return pet;
     }
 }
