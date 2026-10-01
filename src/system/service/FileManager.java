@@ -60,8 +60,26 @@ public class FileManager {
             fw.write("3 - " + pet.getSexo().getSexo()+"\n");
             fw.write("4 - " + pet.getEndereco().getRua()+", "+pet.getEndereco().getNumeroCasa()+
                     ", "+pet.getEndereco().getBairro()+ ", "+pet.getEndereco().getCidade()+"\n");
-            fw.write("5 - " + pet.getIdade()+"\n");
-            fw.write("6 - " + pet.getPeso()+"\n");
+
+            if (pet.getIdade() == null){
+                fw.write("5 - NÃO INFORMADO\n");
+            }
+            else if (pet.getIdade() == 0.25 || pet.getIdade() == 0.5 || pet.getIdade() == 0.75 ) {
+               if (pet.getIdade() == 0.25){
+                   fw.write("5 - 3 Meses\n");
+               } else if (pet.getIdade() == 0.5 ) {
+                   fw.write("5 - 6 Meses\n");
+               }else {
+                   fw.write("5 - 9 Meses\n");
+               }
+            }else{
+                fw.write("5 - "+pet.getIdade().intValue()+" Anos\n");
+            }
+            if (pet.getPeso() == null){
+                fw.write("6 - NÃO INFORMADO\n");
+            }else{
+                fw.write("6 - " + pet.getPeso()+" Kg\n");
+            }
             fw.write("7 - " + pet.getRaca()+"\n");
 
         } catch (IOException e) {
