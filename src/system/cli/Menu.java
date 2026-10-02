@@ -31,18 +31,24 @@ public class Menu {
             System.out.println("==================================");
 
             System.out.print("Escolha uma opção: ");
+            String entrada = null;
             int opcao = 0;
 
             try {
                 // Limpa " " no começo e fim de String e transforma String em Integer
-                opcao = Integer.parseInt(sc.nextLine().trim());
+                entrada = sc.nextLine().trim();
+                opcao = Integer.parseInt(entrada);
 
                 if (opcao <= 0 || opcao > 6) {
                     System.out.println("Opção inválida, escolha novamente.");
                 }
 
             } catch (NumberFormatException e) {
-                System.out.println("Só aceitamos digito.");
+                if ( entrada == ""){
+                    System.out.println("Digite uma das opções.");
+                }else{
+                    System.out.println("Só aceitamos digitos.");
+                }
             }
 
             try {
@@ -81,12 +87,79 @@ public class Menu {
                         petService.processarDadosPet(respostas);
                         pets.add(petService.getPet());
                         teste.salvarRespostas(petService.getPet());
+                        System.out.println("Pet cadastrado com sucesso!");
                     } catch (DadoInvalidoException | EntradaVaziaException e) {
                         System.out.println(e.getMessage());
                     }
                     break;
 
                 case 2:
+                    System.out.println("Qual o tipo do animal:");
+                    System.out.println("1 - Cachorro");
+                    System.out.println("2 - Gato");
+
+                    int opcaoTipo = 0;
+                    int opcaoFirstCriterio = 0;
+                    int opcaoSecondCriterio = 0;
+                    try{
+                        entrada = sc.nextLine().trim();
+                        opcaoTipo = Integer.parseInt(entrada);
+
+                        if (opcaoTipo < 1 || opcaoTipo > 2){
+                            System.out.println("Opção inválida, escolha novamente.");
+                            break;
+                        }
+
+                        System.out.println("Qual o 1° criterio que deseja utiliza:");
+                        System.out.println("1 - Nome");
+                        System.out.println("2 - Sobrenome");
+                        System.out.println("3 - Sexo");
+                        System.out.println("4 - Idade");
+                        System.out.println("5 - Peso");
+                        System.out.println("6 - Raça");
+                        System.out.println("7 - Endereço");
+
+                        entrada = sc.nextLine().trim();
+                        opcaoFirstCriterio = Integer.parseInt(entrada);
+
+                        if (opcaoFirstCriterio < 1 || opcaoFirstCriterio > 7){
+                            System.out.println("Opção inválida, escolha novamente.");
+                            break;
+                        }
+
+                        System.out.println("Deseja ter um 2° criterio de pesquisa (0 - Sim | 1 - Não):");
+
+                        entrada = sc.nextLine().trim();
+                        int confirmaçao = Integer.parseInt(entrada);
+
+                        if (confirmaçao == 0){
+                            System.out.println("Qual o 2° criterio que deseja utiliza:");
+                            System.out.println("1 - Nome");
+                            System.out.println("2 - Sobrenome");
+                            System.out.println("3 - Sexo");
+                            System.out.println("4 - Idade");
+                            System.out.println("5 - Peso");
+                            System.out.println("6 - Raça");
+                            System.out.println("7 - Endereço");
+
+                            entrada = sc.nextLine().trim();
+                            opcaoSecondCriterio = Integer.parseInt(entrada);
+
+                            if (opcaoSecondCriterio < 1 || opcaoSecondCriterio > 7){
+                                System.out.println("Opção inválida, escolha novamente.");
+                                break;
+                            }
+                        }else if (confirmaçao == 1){
+                            break;
+                        }
+
+                    }catch (NumberFormatException e){
+                        if (entrada.equals("")){
+                            System.out.println("Digite uma das opções.");
+                        }else{
+                            System.out.println("Só aceitamos digitos.");
+                        }
+                    }
                     break;
 
                 case 3:

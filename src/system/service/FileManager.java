@@ -50,7 +50,7 @@ public class FileManager {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd'T'HHmm");
         String dataFormatada = now.format(formatter);
 
-        String nomeArquivo = dataFormatada + "-" + pet.getNome().toUpperCase();
+        String nomeArquivo = dataFormatada + "-" + pet.getNome().toUpperCase() + pet.getSobreNome().toUpperCase();
         File file = new File("C:\\Users\\newst\\Desktop\\maratona-java-virado-no-jiraya\\SistemasDeCadastros\\src\\system\\petsCadastrados\\" + nomeArquivo + ".TXT");
 
         try (FileWriter fw = new FileWriter(file)) {
