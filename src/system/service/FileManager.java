@@ -5,6 +5,8 @@ import system.domain.TipoFormulario;
 import system.domain.TipoPet;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -55,37 +57,64 @@ public class FileManager {
 
         try (FileWriter fw = new FileWriter(file)) {
 
-            fw.write("1 - " + pet.getNome() +" "+ pet.getSobreNome()+"\n");
-            fw.write("2 - " + pet.getTipoPet().getNome() +"\n");
-            fw.write("3 - " + pet.getSexo().getSexo()+"\n");
-            fw.write("4 - " + pet.getEndereco().getRua()+", "+pet.getEndereco().getNumeroCasa()+
-                    ", "+pet.getEndereco().getBairro()+ ", "+pet.getEndereco().getCidade()+"\n");
+            fw.write("1 - " + pet.getNome() + " " + pet.getSobreNome() + "\n");
+            fw.write("2 - " + pet.getTipoPet().getNome() + "\n");
+            fw.write("3 - " + pet.getSexo().getSexo() + "\n");
+            fw.write("4 - " + pet.getEndereco().getRua() + ", " + pet.getEndereco().getNumeroCasa() +
+                    ", " + pet.getEndereco().getBairro() + ", " + pet.getEndereco().getCidade() + "\n");
 
-            if (pet.getIdade() == null){
+            if (pet.getIdade() == null) {
                 fw.write("5 - NÃO INFORMADO\n");
+            } else if (pet.getIdade() == 0.25 || pet.getIdade() == 0.5 || pet.getIdade() == 0.75) {
+                if (pet.getIdade() == 0.25) {
+                    fw.write("5 - 3 Meses\n");
+                } else if (pet.getIdade() == 0.5) {
+                    fw.write("5 - 6 Meses\n");
+                } else {
+                    fw.write("5 - 9 Meses\n");
+                }
+            } else {
+                fw.write("5 - " + pet.getIdade().intValue() + " Anos\n");
             }
-            else if (pet.getIdade() == 0.25 || pet.getIdade() == 0.5 || pet.getIdade() == 0.75 ) {
-               if (pet.getIdade() == 0.25){
-                   fw.write("5 - 3 Meses\n");
-               } else if (pet.getIdade() == 0.5 ) {
-                   fw.write("5 - 6 Meses\n");
-               }else {
-                   fw.write("5 - 9 Meses\n");
-               }
-            }else{
-                fw.write("5 - "+pet.getIdade().intValue()+" Anos\n");
-            }
-            if (pet.getPeso() == null){
+            if (pet.getPeso() == null) {
                 fw.write("6 - NÃO INFORMADO\n");
-            }else{
-                fw.write("6 - " + pet.getPeso()+" Kg\n");
+            } else {
+                fw.write("6 - " + pet.getPeso() + " Kg\n");
             }
-            fw.write("7 - " + pet.getRaca()+"\n");
+            fw.write("7 - " + pet.getRaca() + "\n");
 
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
     }
 
+
+    public File reconstrucaoPets() {
+        File pasta = new File("C:\\Users\\newst\\Desktop\\maratona-java-virado-no-jiraya\\SistemasDeCadastros\\src\\system\\petsCadastrados");
+
+        File[] arquivos = pasta.listFiles();
+
+        if (arquivos != null) {
+            for (File arquivo : arquivos) {
+                if (arquivo.isFile()) {
+                    try (FileReader fr = new FileReader(arquivo);
+                         BufferedReader br = new BufferedReader(fr)) {
+                        String linha;
+                        while ((linha = br.readLine()) != null) {
+                            System.out.println(linha);
+                        }
+
+
+                    } catch (IOException e) {
+                        System.out.println("Não foi possível ler o arquivo: " + arquivo.getName());
+                    }
+                }
+            }
+        } else {
+            System.out.println("O diretório é inválido ou está vazio.");
+        }
+
+        return null;
+    }
 }
 

@@ -29,7 +29,8 @@ public class Menu {
             System.out.println("5 - Listar pets por algum critério (idade, nome, raça)");
             System.out.println("6 - Sair");
             System.out.println("==================================");
-
+            FileManager file = new FileManager();
+            file.reconstrucaoPets();
             System.out.print("Escolha uma opção: ");
             String entrada = null;
             int opcao = 0;
@@ -44,9 +45,9 @@ public class Menu {
                 }
 
             } catch (NumberFormatException e) {
-                if ( entrada == ""){
+                if (entrada == "") {
                     System.out.println("Digite uma das opções.");
-                }else{
+                } else {
                     System.out.println("Só aceitamos digitos.");
                 }
             }
@@ -71,6 +72,7 @@ public class Menu {
                             for (int j = 0; j < 4; j++) {
                                 System.out.println(enderecoPerguntas.exibirPerguntas());
                                 enderecos.add(sc.nextLine().trim().replaceAll("\\s+", " "));
+
                             }
 
                             respostas.add(enderecos);
@@ -101,11 +103,11 @@ public class Menu {
                     int opcaoTipo = 0;
                     int opcaoFirstCriterio = 0;
                     int opcaoSecondCriterio = 0;
-                    try{
+                    try {
                         entrada = sc.nextLine().trim();
                         opcaoTipo = Integer.parseInt(entrada);
 
-                        if (opcaoTipo < 1 || opcaoTipo > 2){
+                        if (opcaoTipo < 1 || opcaoTipo > 2) {
                             System.out.println("Opção inválida, escolha novamente.");
                             break;
                         }
@@ -122,7 +124,7 @@ public class Menu {
                         entrada = sc.nextLine().trim();
                         opcaoFirstCriterio = Integer.parseInt(entrada);
 
-                        if (opcaoFirstCriterio < 1 || opcaoFirstCriterio > 7){
+                        if (opcaoFirstCriterio < 1 || opcaoFirstCriterio > 7) {
                             System.out.println("Opção inválida, escolha novamente.");
                             break;
                         }
@@ -132,7 +134,7 @@ public class Menu {
                         entrada = sc.nextLine().trim();
                         int confirmaçao = Integer.parseInt(entrada);
 
-                        if (confirmaçao == 0){
+                        if (confirmaçao == 0) {
                             System.out.println("Qual o 2° criterio que deseja utiliza:");
                             System.out.println("1 - Nome");
                             System.out.println("2 - Sobrenome");
@@ -145,21 +147,27 @@ public class Menu {
                             entrada = sc.nextLine().trim();
                             opcaoSecondCriterio = Integer.parseInt(entrada);
 
-                            if (opcaoSecondCriterio < 1 || opcaoSecondCriterio > 7){
+                            System.out.println();
+
+                            if (opcaoSecondCriterio < 1 || opcaoSecondCriterio > 7) {
                                 System.out.println("Opção inválida, escolha novamente.");
                                 break;
                             }
-                        }else if (confirmaçao == 1){
+                        } else if (confirmaçao == 1) {
                             break;
+                        } else {
+                            System.out.println("Opção inválida, escolha novamente.");
                         }
 
-                    }catch (NumberFormatException e){
-                        if (entrada.equals("")){
+                    } catch (NumberFormatException e) {
+                        if (entrada.equals("")) {
                             System.out.println("Digite uma das opções.");
-                        }else{
+                        } else {
                             System.out.println("Só aceitamos digitos.");
                         }
                     }
+
+                    System.out.println();
                     break;
 
                 case 3:
